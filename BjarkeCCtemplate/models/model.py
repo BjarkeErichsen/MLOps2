@@ -10,3 +10,4 @@ myawesomemodel = nn.Sequential(
     nn.Flatten(),        # [B, 64, 12, 12] -> [B, 64 * 12 * 12]
     nn.Linear(64 * 12 * 12, 10),
 )
+
