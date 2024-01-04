@@ -1,26 +1,12 @@
-import torch
+from torch import nn
 
-class MyNeuralNet(torch.nn.Module):
-    """ Basic neural network class. 
-    
-    Args:
-        in_features: number of input features
-        out_features: number of output features
-    
-    """
-    def __init__(self, in_features: int, out_features: int) -> None:
-        self.l1 = torch.nn.Linear(in_features, 500)
-        self.l2 = torch.nn.Linear(500, out_features)
-        self.r = torch.nn.ReLU()
-    
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Forward pass of the model.
-        
-        Args:
-            x: input tensor expected to be of shape [N,in_features]
 
-        Returns:
-            Output tensor with shape [N,out_features]
-
-        """
-        return self.l2(self.r(self.l1(x)))
+myawesomemodel = nn.Sequential(
+    nn.Conv2d(1, 32, 3),  # [B, 1, 28, 28] -> [B, 32, 26, 26]
+    nn.LeakyReLU(),
+    nn.Conv2d(32, 64, 3), # [B, 32, 26, 26] -> [B, 64, 24, 24]
+    nn.LeakyReLU(),
+    nn.MaxPool2d(2),      # [B, 64, 24, 24] -> [B, 64, 12, 12]
+    nn.Flatten(),        # [B, 64, 12, 12] -> [B, 64 * 12 * 12]
+    nn.Linear(64 * 12 * 12, 10),
+)
