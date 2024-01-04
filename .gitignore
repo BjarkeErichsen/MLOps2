@@ -1,7 +1,7 @@
 docs/site/
 
 #data/raw   ignores both the folder and the files in it
-data/raw/corruptedmnist
+data/*
 
 data/raw/corruptedmnist.dvc
 
