@@ -12,7 +12,7 @@ def test_model():
     # Assuming your input is a numpy array, convert it to a PyTorch tensor
     # For example, let's create a dummy input tensor
     input_tensor = torch.randn(1, 28, 28).to(device=device)
-
+    model.to(device=device)
     # If your model expects a different input shape, adjust the tensor accordingly
     # For example, if your model expects a batch size and a channel dimension, you might need to reshape
     input_tensor = input_tensor.unsqueeze(0)  # Adds a batch dimension
