@@ -15,7 +15,7 @@ on:
 jobs:
   build:
 
-    runs-on: [ubuntu-latest, windows-latest,mac-latest]
+    runs-on: [ubuntu-latest] #windows-latest,mac-latest]
 
     steps:
     - name: Checkout
