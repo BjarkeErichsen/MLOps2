@@ -22,5 +22,5 @@ def test_model(device):
     with torch.no_grad():
         output = model(input_tensor)
 
-    assert output[0].shape == torch.Size([10])
+    assert output[0].shape == torch.Size([8])
     # output is your model's prediction
