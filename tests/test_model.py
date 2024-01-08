@@ -1,13 +1,14 @@
 from BjarkeCCtemplate.models.model import myawesomemodel
 import torch
 import numpy as np 
+
 def test_model():
 
     model = torch.load('models/model0.001_256_20.pt')
     model.eval()  # Set the model to evaluation mode
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
- 
+    device = "cpu"
     # Assuming your input is a numpy array, convert it to a PyTorch tensor
     # For example, let's create a dummy input tensor
     input_tensor = torch.randn(1, 28, 28).to(device=device)
