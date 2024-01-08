@@ -1,21 +1,26 @@
 import click
 import torch
 from torch import nn
-from models.model import myawesomemodel 
+from BjarkeCCtemplate.models.model import myawesomemodel 
 import matplotlib.pyplot as plt
+from pathlib import Path
 
 def processed_mnist():
     """Return train and test dataloaders for MNIST."""
     train_data, train_labels = [ ], [ ]
+    #train_data.append(torch.load(f"data/processed/train_images.pt"))
+    #train_labels.append(torch.load(f"data/processed/train_targets.pt"))
+    working_dir = Path("data/processed")
+    train_images = working_dir/"processed_train_images.pt"
+    train_labels = working_dir/"train_targets.pt"
+    test_images = working_dir/"processed_test_images.pt"
+    test_labels = working_dir/"test_targets.pt"
 
-    train_data.append(torch.load(f"data\processed\processed_test_images.pt\processed_train_images.pt"))
-    train_labels.append(torch.load(f"data\processed\processed_test_images.pt\train_targets.pt"))
+    train_data = torch.load(train_images)
+    train_labels = torch.load(train_labels)
 
-    train_data = torch.cat(train_data, dim=0)
-    train_labels = torch.cat(train_labels, dim=0)
-
-    test_data = torch.load("dataprocessed\processed_test_images.pt")
-    test_labels = torch.load("data\processed\processed_test_targets.pt")
+    test_data = torch.load(test_images)
+    test_labels = torch.load(test_labels)
 
     print(train_data.shape)
     print(train_labels.shape)
@@ -32,7 +37,7 @@ def processed_mnist():
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+print("device", device)
 
 @click.group()
 def cli():

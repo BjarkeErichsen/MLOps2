@@ -46,8 +46,8 @@ def process_data(raw_dir, processed_dir):
     torch.save(test_targets, os.path.join(processed_dir, 'test_targets.pt'))
 
 if __name__ == '__main__':
-    raw_data_dir = 'data\raw\corruptmnist'  # Update this path to the correct location of your raw data
-    processed_data_dir = 'data\processed'   # Update this path to where you want to save your processed data
+    raw_data_dir = 'data/raw'  # Update this path to the correct location of your raw data
+    processed_data_dir = 'data/processed'   # Update this path to where you want to save your processed data
     
     process_data(raw_data_dir, processed_data_dir)
     

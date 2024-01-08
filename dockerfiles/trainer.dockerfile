@@ -18,7 +18,9 @@ COPY reports/ reports/
 
 #installing dependencies. No chache dir to save space
 WORKDIR /
-RUN pip install . --no-cache-dir #(1)
+RUN --mount=type=cache,target=~/pip/.cache pip install -r requirements.txt --no-cache-dir
+#RUN pip install -r requirements.txt --no-cache-dir
+#RUN pip install . --no-cache-dir #(1)
 
-ENTRYPOINT ["python", "-u", "BjarkeCCtemplate/models/train_model.py"]
-
+#what we ask the docker container to do immidiately after "run". Therefore provide train argument. Afterwards, go into vm and we can run train again. 
+ENTRYPOINT ["python", "-u", "BjarkeCCtemplate/train_model.py"]    

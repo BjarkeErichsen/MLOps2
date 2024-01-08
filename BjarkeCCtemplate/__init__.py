@@ -1,2 +1,0 @@
-from BjarkeCCtemplate.models.model import MyNeuralNet
-from BjarkeCCtemplate.predict_model import predict
