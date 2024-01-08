@@ -1,20 +1,21 @@
 import click
 import torch
 from torch import nn
-from BjarkeCCtemplate.models.model import myawesomemodel 
+from BjarkeCCtemplate.models.model import myawesomemodel
 import matplotlib.pyplot as plt
 from pathlib import Path
 
+
 def processed_mnist():
     """Return train and test dataloaders for MNIST."""
-    train_data, train_labels = [ ], [ ]
-    #train_data.append(torch.load(f"data/processed/train_images.pt"))
-    #train_labels.append(torch.load(f"data/processed/train_targets.pt"))
+    train_data, train_labels = [], []
+    # train_data.append(torch.load(f"data/processed/train_images.pt"))
+    # train_labels.append(torch.load(f"data/processed/train_targets.pt"))
     working_dir = Path("data/processed")
-    train_images = working_dir/"processed_train_images.pt"
-    train_labels = working_dir/"train_targets.pt"
-    test_images = working_dir/"processed_test_images.pt"
-    test_labels = working_dir/"test_targets.pt"
+    train_images = working_dir / "processed_train_images.pt"
+    train_labels = working_dir / "train_targets.pt"
+    test_images = working_dir / "processed_test_images.pt"
+    test_labels = working_dir / "test_targets.pt"
 
     train_data = torch.load(train_images)
     train_labels = torch.load(train_labels)
@@ -31,13 +32,14 @@ def processed_mnist():
     test_data = test_data.unsqueeze(1)
 
     return (
-        torch.utils.data.TensorDataset(train_data, train_labels), 
-        torch.utils.data.TensorDataset(test_data, test_labels)
+        torch.utils.data.TensorDataset(train_data, train_labels),
+        torch.utils.data.TensorDataset(test_data, test_labels),
     )
 
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("device", device)
+
 
 @click.group()
 def cli():
@@ -62,7 +64,7 @@ def train(lr, batch_size, num_epochs):
 
     optimizer = torch.optim.Adam(model.parameters(), lr=lr)
     loss_fn = nn.CrossEntropyLoss()
-    epoch_losses = []   
+    epoch_losses = []
     for epoch in range(num_epochs):
         batch_losses = []
         for batch in train_dataloader:
@@ -81,13 +83,13 @@ def train(lr, batch_size, num_epochs):
         epoch_losses.append(epoch_loss)
 
     torch.save(model, f"models/model{lr}_{batch_size}_{num_epochs}.pt")
- 
-     # Save the training curve
+
+    # Save the training curve
     plt.figure()
-    plt.plot(epoch_losses, label='Training Loss')
-    plt.xlabel('Epochs')
-    plt.ylabel('Loss')
-    plt.title('Training Curve')
+    plt.plot(epoch_losses, label="Training Loss")
+    plt.xlabel("Epochs")
+    plt.ylabel("Loss")
+    plt.title("Training Curve")
     plt.legend()
     plt.grid(True)
 
@@ -110,13 +112,11 @@ def evaluate(model_checkpoint):
     # TODO: Implement evaluation logic here
     model = torch.load(model_checkpoint)
     _, test_set = processed_mnist()
-    test_dataloader = torch.utils.data.DataLoader(
-        test_set, batch_size=64, shuffle=False
-    )
+    test_dataloader = torch.utils.data.DataLoader(test_set, batch_size=64, shuffle=False)
     model.eval()
 
-    test_preds = [ ]
-    test_labels = [ ]
+    test_preds = []
+    test_labels = []
     with torch.no_grad():
         for batch in test_dataloader:
             x, y = batch

@@ -1,13 +1,14 @@
 from BjarkeCCtemplate.models.model import myawesomemodel
 import torch
-import numpy as np 
+import numpy as np
 import pytest
+
 
 @pytest.mark.parametrize("device", ["cpu", "cuda"])
 def test_model(device):
     if not torch.cuda.is_available():
         pytest.skip("test was skipped because no cuda support")
-    model = torch.load('models/model0.001_256_20.pt')
+    model = torch.load("models/model0.001_256_20.pt")
     model.eval()  # Set the model to evaluation mode
 
     # Assuming your input is a numpy array, convert it to a PyTorch tensor
@@ -24,3 +25,5 @@ def test_model(device):
 
     assert output[0].shape == torch.Size([10])
     # output is your model's prediction
+
+    assert 10 + 10 == 20

@@ -6,7 +6,7 @@ RUN apt update && \
     apt install --no-install-recommends -y build-essential gcc && \
     apt clean && rm -rf /var/lib/apt/lists/*
 
-#COPY name_in_project name_in_image 
+#COPY name_in_project name_in_image
 COPY pyproject.toml pyproject.toml
 COPY BjarkeCCtemplate/ BjarkeCCtemplate/
 
@@ -22,5 +22,5 @@ RUN --mount=type=cache,target=~/pip/.cache pip install -r requirements.txt --no-
 #RUN pip install -r requirements.txt --no-cache-dir
 #RUN pip install . --no-cache-dir #(1)
 
-#what we ask the docker container to do immidiately after "run". Therefore provide train argument. Afterwards, go into vm and we can run train again. 
-ENTRYPOINT ["python", "-u", "BjarkeCCtemplate/train_model.py"]    
+#what we ask the docker container to do immidiately after "run". Therefore provide train argument. Afterwards, go into vm and we can run train again.
+ENTRYPOINT ["python", "-u", "BjarkeCCtemplate/train_model.py"]
