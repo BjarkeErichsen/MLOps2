@@ -1,9 +1,12 @@
 from BjarkeCCtemplate.models.model import myawesomemodel
 import torch
 import numpy as np 
+import pytest
 
+@pytest.mark.parametrize("accelerator", ["cpu", "gpu"])
 def test_model():
-
+    if not torch.cuda.is_available():
+        pytest.skip("test was skipped because no cuda support")
     model = torch.load('models/model0.001_256_20.pt')
     model.eval()  # Set the model to evaluation mode
 
