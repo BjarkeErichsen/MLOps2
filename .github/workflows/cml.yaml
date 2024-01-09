@@ -22,6 +22,6 @@ jobs:
         run: |
           # send all information to report.md that will be reported to us when the workflow finish
           cat classification_report.txt >> report.md
-          cml-publish confusion_matrix.png --md >> report.md
+          cml-comment confusion_matrix.png --md >> report.md
           cml-send-comment report.md
 
