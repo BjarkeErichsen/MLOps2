@@ -2,7 +2,7 @@ import click
 import torch
 from torch import nn
 import os
-from BjarkeCCtemplate.models.model import myawesomemodel
+from models.model import myawesomemodel
 import matplotlib.pyplot as plt
 from pathlib import Path
 from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay
