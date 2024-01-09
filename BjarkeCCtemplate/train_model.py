@@ -5,7 +5,6 @@ from BjarkeCCtemplate.models.model import myawesomemodel
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-
 def processed_mnist():
     """Return train and test dataloaders for MNIST."""
     train_data, train_labels = [], []

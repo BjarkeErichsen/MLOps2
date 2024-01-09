@@ -110,8 +110,9 @@ def evaluate(model_checkpoint):
     with torch.no_grad():
         for batch in test_dataloader:
             x, y = batch
-            probs = model(x)
-            preds.append(probs.argmax(dim=-1))
+            probs = model(x.to(device=device))
+            preds.append(probs.argmax(dim=-1).cpu())
+            y = y.cpu()
             target.append(y.detach())
     target = torch.cat(target, dim=0)
     preds = torch.cat(preds, dim=0)
@@ -120,13 +121,14 @@ def evaluate(model_checkpoint):
     with open("classification_report.txt", 'w') as outfile:
         outfile.write(report)
     confmat = confusion_matrix(target, preds)
-    disp = ConfusionMatrixDisplay(cm = confmat, )
+    disp = ConfusionMatrixDisplay(confusion_matrix=confmat)
     plt.savefig('confusion_matrix.png')
 
 
 if __name__ == "__main__":
     lr = 0.001
-    batch_size = 10
-    num_epochs = 20
+    batch_size = 256
+    num_epochs = 2
     model_checkpoint = train(lr, batch_size, num_epochs)
+    print(model_checkpoint)
     evaluate(model_checkpoint)
