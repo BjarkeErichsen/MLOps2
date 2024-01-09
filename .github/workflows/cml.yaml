@@ -7,13 +7,14 @@ jobs:
       - uses: actions/checkout@v2
       - uses: iterative/setup-dvc@v1
       - name: Get data
-        run: dvc pull
+        run: |
+          pip install -r requirements.txt  # install dependencies
+          dvc pull
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
       - uses: iterative/setup-cml@v1
       - name: Train model
         run: |
-          pip install -r requirements.txt  # install dependencies
           python BjarkeCCtemplate/train_cml.py  # run training
       - name: Write report
         env:
@@ -22,6 +23,6 @@ jobs:
         run: |
           # send all information to report.md that will be reported to us when the workflow finish
           cat classification_report.txt >> report.md
-          cml-comment confusion_matrix.png --md >> report.md
+          cml-publish confusion_matrix.png --md >> report.md
           cml-send-comment report.md
 
