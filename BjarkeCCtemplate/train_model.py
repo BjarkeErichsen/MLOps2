@@ -1,7 +1,7 @@
 import click
 import torch
 from torch import nn
-from BjarkeCCtemplate.models.model import myawesomemodel
+from models.model import myawesomemodel
 import matplotlib.pyplot as plt
 from pathlib import Path
 
