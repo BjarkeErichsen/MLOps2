@@ -19,3 +19,8 @@ jobs:
           cat classification_report.txt >> report.md
           cml-publish confusion_matrix.png --md >> report.md
           cml-send-comment report.md
+      - uses: iterative/setup-dvc@v1
+      - name: Get data
+        run: dvc pull
+        env:
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
