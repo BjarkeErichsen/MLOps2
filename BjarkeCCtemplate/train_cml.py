@@ -105,7 +105,6 @@ def evaluate(model_checkpoint):
     test_dataloader = torch.utils.data.DataLoader(test_set, batch_size=64, shuffle=False)
     model.eval()
 
-
     preds, target = [], []
     with torch.no_grad():
         for batch in test_dataloader:

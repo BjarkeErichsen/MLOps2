@@ -1,7 +1,7 @@
 import click
 import torch
 from torch import nn
-from models.model import myawesomemodel
+from BjarkeCCtemplate.models.model import myawesomemodel
 import matplotlib.pyplot as plt
 from pathlib import Path
 
@@ -18,10 +18,16 @@ def processed_mnist():
 
     train_data = torch.load(train_images)
     train_labels = torch.load(train_labels)
-
+    
     test_data = torch.load(test_images)
     test_labels = torch.load(test_labels)
-
+    """
+    # Add loading from gcc cloud in the future!
+    # loading from a bucket using mounted file system
+    data = torch.load('/gcs/<my-bucket-name>/data.pt')
+    # writing to a bucket using mounted file system
+    torch.save(data, '/gcs/<my-bucket-name>/data.pt')
+    """
     print(train_data.shape)
     print(train_labels.shape)
     print(test_data.shape)
