@@ -8,13 +8,13 @@ jobs:
       - uses: iterative/setup-dvc@v1
       - name: Get data
         run: |
-          pip install -r requirements.txt  # install dependencies
           dvc pull
         env:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
       - uses: iterative/setup-cml@v1
       - name: Train model
         run: |
+          pip install -r requirements.txt  # install dependencies
           python BjarkeCCtemplate/train_cml.py  # run training
       - name: Write report
         env:
