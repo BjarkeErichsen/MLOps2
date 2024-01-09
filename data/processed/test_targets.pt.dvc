@@ -1,0 +1,5 @@
+outs:
+- md5: f8db488a97ca5a255f8f0ec4ed0b59ec
+  size: 81205
+  hash: md5
+  path: test_targets.pt

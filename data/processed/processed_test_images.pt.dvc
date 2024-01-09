@@ -1,0 +1,5 @@
+outs:
+- md5: 07d47010c4be1c043b9d7d1b0ddad3fd
+  size: 15681250
+  hash: md5
+  path: processed_test_images.pt

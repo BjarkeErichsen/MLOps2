@@ -1,0 +1,4 @@
+/processed_train_images.pt
+/processed_test_images.pt
+/test_targets.pt
+/train_targets.pt
