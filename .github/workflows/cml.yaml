@@ -1,13 +1,22 @@
 name: train-my-model
+
 on: 
   push:
-    branches: [main]
+    branches: [master]
   pull_request: 
-    branches: [main]
+    branches: [master]
 
 jobs:
   run:
     runs-on: [ubuntu-latest]
+
+    permissions:
+      actions: write
+      contents: write
+      id-token: write
+      issues: write
+      pull-requests: write
+
     steps:
       - uses: actions/checkout@v2
       - uses: iterative/setup-dvc@v1
