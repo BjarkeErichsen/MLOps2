@@ -1,5 +1,10 @@
 name: train-my-model
-on: [push]
+on: 
+  push:
+    branches: [main]
+  pull_request: 
+    branches: [main]
+
 jobs:
   run:
     runs-on: [ubuntu-latest]
