@@ -127,7 +127,7 @@ def evaluate(model_checkpoint):
 if __name__ == "__main__":
     lr = 0.001
     batch_size = 256
-    num_epochs = 2
+    num_epochs = 1
     model_checkpoint = train(lr, batch_size, num_epochs)
     print(model_checkpoint)
     evaluate(model_checkpoint)
