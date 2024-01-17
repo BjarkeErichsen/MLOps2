@@ -1,1 +1,20 @@
-#fill with commands that would match a trigger on gcloud
+#fill with commands that would match a TRIGGER on gcloud
+
+steps:
+# Build the container image
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/woven-plane-410710/gcp_test_app@sha256:230be436984f500adbea22c5f17072d554febd503e6ffb8886528433da0889e4', '.'] 
+# Push the container image to Container Registry
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/woven-plane-410710/gcp_test_app@sha256:230be436984f500adbea22c5f17072d554febd503e6ffb8886528433da0889e4']
+# Deploy container image to Cloud Run
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args:
+  - 'run'
+  - 'deploy'
+  - 'gcp_test_app3'
+  - '--image'
+  - 'gcr.io/woven-plane-410710/gcp_test_app@sha256:230be436984f500adbea22c5f17072d554febd503e6ffb8886528433da0889e4'
+  - '--region'
+  - 'europe-west1'
